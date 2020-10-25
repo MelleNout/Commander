@@ -32,8 +32,8 @@ namespace Commander
 
             services.AddControllers();
 
-            //whenever the application asks for ICommanderRepo, give it MockCOmmanderRepo
-            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+            //whenever the application asks for ICommanderRepo, give it CommanderRepo
+            services.AddScoped<ICommanderRepo, CommanderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
