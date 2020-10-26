@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Commander.Migrations
 {
@@ -11,7 +12,7 @@ namespace Commander.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     HowTo = table.Column<string>(maxLength: 250, nullable: false),
                     Line = table.Column<string>(nullable: false),
                     Platform = table.Column<string>(nullable: false)

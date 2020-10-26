@@ -27,7 +27,8 @@ namespace Commander.Controllers
         public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
             var commandItems = _repository.GetAllCommands();
-            
+
+            //Map the commandItems into an IEnumerable of type CommandReadDto
             return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
 
