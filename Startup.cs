@@ -40,6 +40,10 @@ namespace Commander
 
             //whenever the application asks for ICommanderRepo, give it CommanderRepo
             services.AddScoped<ICommanderRepo, CommanderRepo>();
+        
+            services.AddSwaggerGen(gen => {
+                gen.SwaggerDoc("v0.1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Commander API", Version = "v0.1"});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +59,12 @@ namespace Commander
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(ui => {
+                ui.SwaggerEndpoint("/swagger/v0.1/swagger.json", "Commander API Endpoint");
+            });
 
             app.UseEndpoints(endpoints =>
             {

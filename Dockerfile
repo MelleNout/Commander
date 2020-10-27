@@ -16,4 +16,4 @@ WORKDIR /app
 COPY --from=publish /src/publish .
 # ENTRYPOINT ["dotnet", "Commander.dll"]
 # heroku uses the following
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet commander-api.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Commander.dll
