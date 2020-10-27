@@ -1,19 +1,16 @@
 # NuGet restore
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /src
-COPY *.sln .
-COPY commander-api/*.csproj commander-api/
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+WORKDIR /app
+
+COPY Commander.csproj ./
+
 RUN dotnet restore
+
 COPY . .
 
-# publish
-FROM build AS publish
-WORKDIR /src/commander-api
-RUN dotnet publish -c Release -o /src/publish
+RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
-COPY --from=publish /src/publish .
-# ENTRYPOINT ["dotnet", "Commander.dll"]
-# heroku uses the following
+COPY --from=build-env /app/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet Commander.dll
